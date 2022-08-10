@@ -4,8 +4,14 @@ import (
 	"log"
 	"sort"
 	"sync"
+)
 
-	"config/pkg/config"
+type Kind uint
+
+const (
+	Map Kind = iota
+	Slice
+	Struct
 )
 
 var (
@@ -20,7 +26,7 @@ type Config interface {
 
 	Order() int
 
-	Kind() config.Kind
+	Kind() Kind
 }
 
 func Register(name string, config Config) {
@@ -42,8 +48,8 @@ func GetConfigs() []Config {
 	lock.Lock()
 	defer lock.Unlock()
 	var cs []Config
-	for _, config := range configs {
-		cs = append(cs, config)
+	for _, cfg := range configs {
+		cs = append(cs, cfg)
 	}
 	sort.Slice(cs, func(i, j int) bool {
 		return cs[i].Order() < cs[j].Order()

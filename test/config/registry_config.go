@@ -1,9 +1,11 @@
 package config
 
-import "config/pkg/config"
+import (
+	"config/pkg/extension"
+)
 
-// RegistryConfig is the configuration of the registry center
-type RegistryConfig struct {
+// Registry is the configuration of the registry center
+type Registry struct {
 	Protocol  string `validate:"required" yaml:"protocol"  json:"protocol,omitempty" property:"protocol"`
 	Timeout   string `default:"5s" validate:"required" yaml:"timeout" json:"timeout,omitempty" property:"timeout"` // unit: second
 	Group     string `yaml:"group" json:"group,omitempty" property:"group"`
@@ -14,19 +16,18 @@ type RegistryConfig struct {
 	Weight    int64  `yaml:"weight" json:"weight,omitempty" property:"weight"` // Affects traffic distribution among registriesConfig, useful when subscribe to multiple registriesConfig Take effect only when no preferred registry is specified.
 }
 
-func (rc *RegistryConfig) Kind() config.Kind {
-	return config.Map
+func (rc *Registry) Kind() extension.Kind {
+	return extension.Map
 }
 
-func (rc *RegistryConfig) Prefix() string {
+func (rc *Registry) Prefix() string {
 	return "dubbo.registries"
 }
 
-func (rc *RegistryConfig) Load() error {
-	//TODO implement me
-	panic("implement me")
+func (rc *Registry) Load() error {
+	return nil
 }
 
-func (rc *RegistryConfig) Order() int {
+func (rc *Registry) Order() int {
 	return 3
 }

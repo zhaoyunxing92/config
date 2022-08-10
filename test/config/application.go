@@ -1,6 +1,8 @@
 package config
 
-import "config/pkg/config"
+import (
+	"config/pkg/extension"
+)
 
 type Application struct {
 	Organization string `default:"dubbo-go" yaml:"organization" json:"organization,omitempty" property:"organization"`
@@ -18,14 +20,13 @@ func (a *Application) Prefix() string {
 }
 
 func (a *Application) Load() error {
-	//TODO implement me
-	panic("implement me")
+	return nil
 }
 
 func (a *Application) Order() int {
 	return 1
 }
 
-func (a *Application) Kind() config.Kind {
-	return config.Struct
+func (a *Application) Kind() extension.Kind {
+	return extension.Struct
 }

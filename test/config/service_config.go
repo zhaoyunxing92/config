@@ -1,9 +1,11 @@
 package config
 
-import "config/pkg/config"
+import (
+	"config/pkg/extension"
+)
 
-// ServiceConfig is the configuration of the service provider
-type ServiceConfig struct {
+// Service is the configuration of the service provider
+type Service struct {
 	Filter    string          `yaml:"filter" json:"filter,omitempty" property:"filter"`
 	Interface string          `yaml:"interface"  json:"interface,omitempty" property:"interface"`
 	Cluster   string          `default:"failover" yaml:"cluster"  json:"cluster,omitempty" property:"cluster"`
@@ -12,19 +14,18 @@ type ServiceConfig struct {
 	Retries   string          `yaml:"retries"  json:"retries,omitempty" property:"retries"`
 }
 
-func (sc *ServiceConfig) Kind() config.Kind {
-	return config.Map
+func (sc *Service) Kind() extension.Kind {
+	return extension.Map
 }
 
-func (sc *ServiceConfig) Prefix() string {
+func (sc *Service) Prefix() string {
 	return "dubbo.provider.services"
 }
 
-func (sc *ServiceConfig) Load() error {
-	//TODO implement me
-	panic("implement me")
+func (sc *Service) Load() error {
+	return nil
 }
 
-func (sc *ServiceConfig) Order() int {
+func (sc *Service) Order() int {
 	return 5
 }
