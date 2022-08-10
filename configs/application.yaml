@@ -1,0 +1,4 @@
+dubbo:
+  application:
+    name: dubbo
+    model: local
