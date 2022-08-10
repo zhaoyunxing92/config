@@ -1,4 +1,31 @@
 dubbo:
+  registries:
+    nacos:
+      protocol: nacos
+      address: localhost:8848
+      weight: 100
+    zookeeper:
+      protocol: zookeeper
+      address: localhost:8848
+      weight: 100
   application:
     name: dubbo
     model: local
+    version: 1.0.0
+    owner: zhaoyunxing
+  provider:
+    filter: echo
+    register: true
+    registry: ["shanghai","hangzhou"]
+    services:
+      UserService:
+        filter: echo
+        interface: org.apache.dubbo.UserService
+        cluster: failover
+        methods:
+          - name: getUser
+            retries: 3
+            weight: 100
+          - name: getOrder
+            retries: 3
+            weight: 100

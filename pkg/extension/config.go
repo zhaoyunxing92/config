@@ -4,6 +4,8 @@ import (
 	"log"
 	"sort"
 	"sync"
+
+	"config/pkg/config"
 )
 
 var (
@@ -17,6 +19,8 @@ type Config interface {
 	Load() error
 
 	Order() int
+
+	Kind() config.Kind
 }
 
 func Register(name string, config Config) {
