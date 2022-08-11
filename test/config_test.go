@@ -14,7 +14,7 @@ func TestLoad(t *testing.T) {
 	//extension.Register("provider", &config.Provider{})
 	//extension.Register("registry", &config.Registry{})
 	//extension.Register("service", &config.Service{})
-	err := config.Load("../configs")
+	err := config.Load("./configs/application.yaml")
 	if err != nil {
 		t.Fatalf("config load err:%v", err)
 	}

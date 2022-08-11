@@ -1,0 +1,15 @@
+dubbo:
+  registries:
+    hangzhou:
+      protocol: ${dubbo.provider.filter:nacos}
+      address: nacos://localhost:8848
+    shanghai:
+      address: ${dubbo.registries.hangzhou.address:nacos://localhost:8848}
+  application:
+    name: dubbo
+  provider:
+    filter: echo
+    registry: ["shanghai","hangzhou"]
+    services:
+      UserService:
+        interface: org.apache.dubbo.UserService

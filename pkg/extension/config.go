@@ -6,14 +6,6 @@ import (
 	"sync"
 )
 
-type Kind uint
-
-const (
-	Map Kind = iota
-	Slice
-	Struct
-)
-
 var (
 	configs map[string]Config
 	lock    sync.Mutex
@@ -22,11 +14,14 @@ var (
 type Config interface {
 	Prefix() string
 
-	Load() error
+	Process(config map[string]interface{}) error
 
 	Order() int
+}
 
-	Kind() Kind
+// ConfigPostProcess config post process
+type ConfigPostProcess interface {
+	Process(map[string]interface{})
 }
 
 func Register(name string, config Config) {
